@@ -2,7 +2,7 @@
   <div>
     <top-header/>
     <main id="main" role="main">
-      <nuxt/>
+      <nuxt keep-alive/>
     </main>
     <bottom-footer/>
   </div>

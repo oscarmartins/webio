@@ -28,6 +28,12 @@ import AppLogo from '~/components/AppLogo.vue'
 export default {
   components: {
     AppLogo
+  },
+  fetch (a,b) {
+    console.log(123)
+  },
+  validate ({store}) {
+    return true
   }
 }
 </script>
