@@ -1,70 +1,102 @@
 <template>
-  <section class="container">
-    <div>
-      <app-logo/>
-      <h1 class="title">
-        webio
-      </h1>
-      <h2 class="subtitle">
-        Nuxt.js project
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green">Documentation</a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey">GitHub</a>
-      </div>
-    </div>
-  </section>
+  <div class="columns">
+    <div class="column is-one-third"></div>
+    <div class="column is-one-third">
+    <nav class="panel">
+      <p class="panel-heading ">ORC ADMIN</p>
+      <label class="panel-block">
+        <div class="notification is-danger" v-if="this.formError">
+          <button class="delete"></button>
+          {{this.formError}}
+        </div>
+      </label>
+      <div class="panel-block">
+      <section>
+        
+      <!--button class="button" @click="activeTab = 1">Set Music</button-->
+      <b-tabs v-model="activeTab">
+        <b-tab-item label="Sign-In">
+          <section>
+            <b-field label="User Email">
+              <b-input type="email"
+                  maxlength="50" v-model="email">
+              </b-input>
+            </b-field>
+            <b-field label="Password">
+            <b-input type="password" maxlength="30" v-model="password"></b-input>
+        </b-field>
+        <b-field ><!-- Label left empty for spacing -->
+            <p class="control">
+                <button class="button is-primary" @click="login()">
+                  submit
+                </button>
+            </p>
+        </b-field>
+          </section>
+        </b-tab-item>
+
+        <b-tab-item label="Sign-Up">
+       
+        </b-tab-item>
+    </b-tabs>
+</section>
+  </div>
+  <label class="panel-block">
+    <input type="checkbox">
+    remember me
+  </label>
+  <div class="panel-block">
+    <button class="button is-link is-outlined is-fullwidth">
+      reset all filters
+    </button>
+  </div>
+  </nav>  
+    </div>  
+    <div class="column is-one-third"></div>  
+  </div>  
 </template>
 
 <script>
-import AppLogo from '~/components/AppLogo.vue'
-
 export default {
-  components: {
-    AppLogo
+  data() {
+    return {
+      activeTab: 0,
+      formError: null,
+      email: "",
+      password: ""
+    };
   },
-  fetch (a,b) {
-    console.log(123)
-  },
-  validate ({store}) {
-    return true
+  methods: {
+    async login() {
+      try {
+        await this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password
+        });
+        this.email = "";
+        this.password = "";
+        this.formError = null;
+      } catch (e) {
+        debugger
+        this.formError = e.message;
+      }
+    },
+    async logout() {
+      try {
+        await this.$store.dispatch("logout");
+      } catch (e) {
+        this.formError = e.message;
+      }
+    }
   }
-}
+};
 </script>
 
 <style>
 .container {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
+  padding: 100px;
 }
-
-.title {
-  font-family: "Quicksand", "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; /* 1 */
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-}
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-}
-
-.links {
-  padding-top: 15px;
+.error {
+  color: red;
 }
 </style>

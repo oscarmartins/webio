@@ -1,9 +1,9 @@
 <template>
   <div>
     <top-header/>
-    <main id="main" role="main">
-      <nuxt keep-alive/>
-    </main>
+    <div class="section">
+      <nuxt keep-alive/>      
+    </div>
     <bottom-footer/>
   </div>
 </template>

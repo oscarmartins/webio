@@ -13,10 +13,18 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "nuxt": "^1.3.0",
-    "vue": "^2.5.13",
-    "vuex": "^3.0.1",
-    "vuex-persistedstate": "latest"
+    "@nuxtjs/axios": "latest",
+    "axios": "latest",
+    "body-parser": "latest",
+    "express": "latest",
+    "express-session": "latest",
+    "nuxt": "latest",
+    "vue": "latest",
+    "vuex": "latest",
+    "vuex-persistedstate": "latest",
+    "buefy": "latest",
+    "bulma": "latest",
+    "bulma-steps-component": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
