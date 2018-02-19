@@ -1,20 +1,21 @@
 <template>
-  <div class="columns">
+<div class="section">
+
+    <div class="columns is-multiline is-centered">
     <div class="column is-one-third"></div>
-    <div class="column is-one-third">
-    <nav class="panel">
+    <div class="column is-one-third centered is-full">
+    <nav class="panel" >
       <p class="panel-heading ">ORC ADMIN</p>
-      <label class="panel-block">
-        <div class="notification is-danger" v-if="this.formError">
+      <label class="panel-block" v-if="this.formError" >
+        <div class="notification is-danger" >
           <button class="delete"></button>
           {{this.formError}}
         </div>
       </label>
-      <div class="panel-block">
-      <section>
-        
+      <div class="panel-block" >
+                
       <!--button class="button" @click="activeTab = 1">Set Music</button-->
-      <b-tabs v-model="activeTab">
+      <b-tabs v-model="activeTab" expanded>
         <b-tab-item label="Sign-In">
           <section>
             <b-field label="User Email">
@@ -39,8 +40,8 @@
        
         </b-tab-item>
     </b-tabs>
-</section>
-  </div>
+      </div>
+  <!--
   <label class="panel-block">
     <input type="checkbox">
     remember me
@@ -50,10 +51,12 @@
       reset all filters
     </button>
   </div>
+  -->
   </nav>  
     </div>  
     <div class="column is-one-third"></div>  
-  </div>  
+  </div> 
+</div>
 </template>
 
 <script>
@@ -79,6 +82,11 @@ export default {
       } catch (e) {
         debugger
         this.formError = e.message;
+        this.$dialog.alert({
+                title: 'Error',
+                message: '<h1>' + this.formError + '</h1>',
+                confirmText: 'ok'
+        })
       }
     },
     async logout() {
@@ -92,11 +100,6 @@ export default {
 };
 </script>
 
-<style>
-.container {
-  padding: 100px;
-}
-.error {
-  color: red;
-}
+<style scoped>
+
 </style>

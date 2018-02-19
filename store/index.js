@@ -6,11 +6,15 @@ export const state = () => ({
 
 export const mutations = {
   SET_USER: function (state, user) {
+    debugger
+    Object.keys(user)
+    .filter(key => ['password'].includes(key))
+    .forEach(key => delete user[key]);
+    debugger
     state.authUser = user
   },
   SET_TOKEN: function (state, token) {
     state.token = token
-    debugger
     this.$axios.setToken(token,'Bearer')
   }
 }
@@ -31,7 +35,9 @@ export const actions = {
       const { data } = await this.$axios.post('/api/login', {username: email, password: password})
       commit('SET_USER', data.profile)
       commit('SET_TOKEN', data.access_token)
+      setTimeout((r)=>{r.push({ name: 'secret', params: { userId: data.profile._id }})},1500,this.$router);
       
+
     } catch (error) {
       if (error.response) {
         if (error.response.status === 401) {
